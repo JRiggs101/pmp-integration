@@ -3,10 +3,7 @@ from fuzzywuzzy import process, fuzz
 
 def fuzzymergy(gateway, terms):
    tnc = terms.collect()['org_name'].to_list()
-   test_str = 'SONORAN SLEEP CENTER'
-   print(process.extract(test_str, tnc, limit=1)[0][0])
-   print(process.extract(test_str, tnc, limit=1)[0][1])
-
+   
    result = (
       gateway
       .collect()
