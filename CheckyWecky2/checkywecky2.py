@@ -2,17 +2,17 @@ import polars as pl
 from fuzzywuzzy import process, fuzz
 
 def fuzzymergy(gateway, terms):
-   wow = terms.collect()['org_name'].to_list()
+   tnc = terms.collect()['org_name'].to_list()
    test_str = 'SONORAN SLEEP CENTER'
-   print(process.extract(test_str, wow, limit=1)[0][0])
-   print(process.extract(test_str, wow, limit=1)[0][1])
+   print(process.extract(test_str, tnc, limit=1)[0][0])
+   print(process.extract(test_str, tnc, limit=1)[0][1])
 
    result = (
       gateway
       .collect()
       .with_columns(
-         pl.col('licensee_clean').map_elements(lambda x: process.extract(x, wow, limit=1)[0][0]).alias('match'),
-         pl.col('licensee_clean').map_elements(lambda x: process.extract(x, wow, limit=1)[0][1]).alias('score')
+         pl.col('licensee_clean').map_elements(lambda x: process.extract(x, tnc, limit=1)[0][0]).alias('match'),
+         pl.col('licensee_clean').map_elements(lambda x: process.extract(x, tnc, limit=1)[0][1]).alias('score')
       )
     )
    return result
